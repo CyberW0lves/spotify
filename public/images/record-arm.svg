@@ -1,0 +1,22 @@
+
+<svg width="268px" height="480px" viewBox="962 187 268 480" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <defs>
+        <path d="M155.896933,13.6548516 L179.97985,5.11125025 L195.734649,145.764683 C198.925352,174.250185 194.21223,219.399281 185.208949,246.60392 L114.633205,459.85815 L92.9375273,451.570201 L160.878597,240.085795 C169.156111,214.319861 173.445152,171.635166 170.455764,144.722784 L155.896933,13.6548516 Z" id="path-1"></path>
+        <mask id="mask-2" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="103.795152" height="454.7469" fill="white">
+            <use xlink:href="#path-1"></use>
+        </mask>
+        <path d="M19.6941468,410.12864 C19.8801662,408.479241 21.3800456,407.163575 23.0397971,407.18995 L45.3883996,407.545078 C47.0501318,407.571483 48.3578766,408.937208 48.3093033,410.5964 L48.0262033,420.266676 L66.5908236,423.94735 C68.217763,424.269912 69.5328478,425.871017 69.4586058,427.520915 C69.4586058,427.520915 69.7365454,432.256538 67.6541937,432.890386 C65.5718421,433.524234 48.3729393,433.093181 48.3729393,433.093181 L49.1807423,465.421491 C49.2220951,467.076433 47.9094553,468.378702 46.2622087,468.330579 L16.2323425,467.453283 C14.5791281,467.404985 13.3903172,466.023537 13.5757509,464.37933 L19.6941468,410.12864 Z" id="path-3"></path>
+        <mask id="mask-4" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="55.9142494" height="61.1423114" fill="white">
+            <use xlink:href="#path-3"></use>
+        </mask>
+        <rect id="path-5" x="203.827503" y="17.3711587" width="62" height="25" rx="10"></rect>
+        <mask id="mask-6" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="62" height="25" fill="white">
+            <use xlink:href="#path-5"></use>
+        </mask>
+    </defs>
+    <g id="arm" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(962.000000, 187.000000)">
+        <use id="Rectangle" stroke="#503750" mask="url(#mask-2)" stroke-width="6" fill="#FFCDD2" transform="translate(144.835103, 232.484700) rotate(-702.000000) translate(-144.835103, -232.484700) " xlink:href="#path-1"></use>
+        <use id="Rectangle-6" stroke="#503750" mask="url(#mask-4)" stroke-width="6" fill="#FFCDD2" transform="translate(41.513820, 437.760716) rotate(-323.000000) translate(-41.513820, -437.760716) " xlink:href="#path-3"></use>
+        <use id="Rectangle-3" stroke="#503750" mask="url(#mask-6)" stroke-width="6" fill="#FFCDD2" transform="translate(234.827503, 29.871159) rotate(-350.000000) translate(-234.827503, -29.871159) " xlink:href="#path-5"></use>
+    </g>
+</svg>

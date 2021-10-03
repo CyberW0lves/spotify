@@ -36,7 +36,7 @@ const footerLinks = [
 
 const footerIcons = [<InstagramIcon />, <TwitterIcon />, <FacebookIcon />];
 
-const Main = () => {
+const Home = () => {
 	return (
 		<div className={styles.container}>
 			<nav className={styles.navbar_container}>
@@ -115,4 +115,4 @@ const Main = () => {
 	);
 };
 
-export default Main;
+export default Home;
