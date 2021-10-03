@@ -41,7 +41,7 @@ const Main = () => {
 		<div className={styles.container}>
 			<nav className={styles.navbar_container}>
 				<Link to="/" className={styles.nav_logo}>
-					<img src="./icons/logo_white.png" alt="logo" />
+					<img src="./icons/logo.svg" alt="logo" />
 				</Link>
 				<div className={styles.nav_links}>
 					{navLinks.map((link, index) => (
@@ -63,7 +63,7 @@ const Main = () => {
 			<footer className={styles.footer_container}>
 				<div className={styles.footer_1}>
 					<Link to="/" className={styles.footer_logo}>
-						<img src="./icons/logo_white.png" alt="logo" />
+						<img src="./icons/logo.svg" alt="logo" />
 					</Link>
 					<div className={styles.footer_1_links}>
 						<div className={styles.footer_heading}>Company</div>
