@@ -1,0 +1,35 @@
+.container {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+
+	p {
+		margin: 0.5rem 0;
+		font-weight: 500;
+		font-size: 1.4rem;
+	}
+
+	.select {
+		height: 5rem;
+		font-size: 1.6rem;
+		font-weight: 400;
+		border-radius: 0.5rem;
+		border: 0.1rem solid var(--black);
+		padding: 0 1rem;
+
+		&:hover {
+			outline: 1px solid var(--black);
+		}
+	}
+	.error {
+		border-color: red;
+		outline: red;
+	}
+
+	.error_msg {
+		color: red;
+		margin: 0.2rem 0;
+		font-weight: 400;
+	}
+}

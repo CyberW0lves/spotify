@@ -9,6 +9,11 @@ html {
 	font-size: 10px;
 }
 
+a {
+	text-decoration: none;
+	color: inherit;
+}
+
 code {
 	font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
 		monospace;
@@ -19,6 +24,10 @@ code {
 	--black: #000000;
 	--white: #ffffff;
 	--blue: #2941ab;
+	--sky-blue: #1877f2;
+	--gray: #8c8c8c;
+	--dark-green: #15883e;
+	--light-gray: #616467;
 	--light-white: #919496;
 	--light-black: #222326;
 	--light-pink: #ffcdd2;

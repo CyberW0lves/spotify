@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import Button from "../Button";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import FacebookIcon from "@mui/icons-material/Facebook";
@@ -9,8 +10,8 @@ const navLinks = [
 	{ name: "Premium", link: "#" },
 	{ name: "Support", link: "#" },
 	{ name: "Download", link: "#" },
-	{ name: "Sign up", link: "/sign-up" },
-	{ name: "Log in", link: "/log-in" },
+	{ name: "Sign up", link: "/signup" },
+	{ name: "Log in", link: "/login" },
 ];
 
 const companyLInks = ["About", "Jobs", "For the record"];
@@ -41,7 +42,7 @@ const Home = () => {
 		<div className={styles.container}>
 			<nav className={styles.navbar_container}>
 				<Link to="/" className={styles.nav_logo}>
-					<img src="./icons/logo.svg" alt="logo" />
+					<img src="./icons/white_logo.svg" alt="logo" />
 				</Link>
 				<div className={styles.nav_links}>
 					{navLinks.map((link, index) => (
@@ -55,15 +56,18 @@ const Home = () => {
 				<div className={styles.main}>
 					<h1>Listening is everything</h1>
 					<p>Millions of songs and podcasts. No credit card needed.</p>
-					<Link to="/sign-up">
-						<button className={styles.btn}>Get spotify free</button>
+					<Link to="/signup">
+						<Button
+							label="GET SPOTIFY FREE"
+							style={{ color: "#2941ab", width: "18rem", fontSize: "1.4rem" }}
+						/>
 					</Link>
 				</div>
 			</main>
 			<footer className={styles.footer_container}>
 				<div className={styles.footer_1}>
 					<Link to="/" className={styles.footer_logo}>
-						<img src="./icons/logo.svg" alt="logo" />
+						<img src="./icons/white_logo.svg" alt="logo" />
 					</Link>
 					<div className={styles.footer_1_links}>
 						<div className={styles.footer_heading}>Company</div>
