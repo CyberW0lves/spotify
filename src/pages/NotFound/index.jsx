@@ -1,6 +1,9 @@
+import { useHistory } from "react-router-dom";
 import styles from "./styles.module.scss";
 
 const NotFound = () => {
+	const history = useHistory();
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.left}>
@@ -10,9 +13,7 @@ const NotFound = () => {
 						We couldn’t find the page you were looking for. Maybe our FAQ or
 						Community can help?
 					</p>
-					<a onClick={() => window.history.back()} href="/#">
-						Go Back
-					</a>
+					<span onClick={() => history.push("/home")}>Go Back Home</span>
 				</div>
 			</div>
 			<div className={styles.right}>

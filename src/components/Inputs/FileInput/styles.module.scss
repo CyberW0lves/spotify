@@ -1,0 +1,51 @@
+.container {
+	width: calc(100% - 2rem);
+	border: 1px solid var(--white);
+	border-radius: 0.5rem;
+	padding: 1rem;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+
+	input {
+		display: none;
+	}
+
+	audio {
+		width: 25rem;
+		height: 4rem;
+		border-radius: 0.1rem;
+	}
+
+	img {
+		width: 8rem;
+		height: 8rem;
+		object-fit: contain;
+	}
+
+	.success {
+		width: 4rem;
+		height: 4rem;
+		color: var(--primary);
+	}
+
+	.progress_container {
+		width: 11rem;
+		display: flex;
+		position: relative;
+		justify-content: center;
+		align-items: center;
+
+		.progress {
+			color: var(--primary) !important;
+		}
+
+		p {
+			position: absolute;
+			left: 0;
+			width: inherit;
+			text-align: center;
+			font-size: 1.2rem;
+		}
+	}
+}

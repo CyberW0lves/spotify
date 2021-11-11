@@ -3,7 +3,14 @@ import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import styles from "./styles.module.scss";
 
-const RadioInput = ({ name, handleInputState, label, options, required }) => {
+const RadioInput = ({
+	name,
+	handleInputState,
+	label,
+	options,
+	required,
+	...rest
+}) => {
 	const handleChange = ({ currentTarget: input }) => {
 		handleInputState(input.name, input.value);
 	};
@@ -11,7 +18,7 @@ const RadioInput = ({ name, handleInputState, label, options, required }) => {
 	return (
 		<div className={styles.container}>
 			<p>{label}</p>
-			<RadioGroup row name={name} onChange={handleChange}>
+			<RadioGroup {...rest} row name={name} onChange={handleChange}>
 				{options.map((option, index) => (
 					<FormControlLabel
 						key={index}

@@ -1,9 +1,10 @@
 import { Link } from "react-router-dom";
-import Button from "../Button";
+import Button from "../../components/Button";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import CopyrightIcon from "@mui/icons-material/Copyright";
+import logo from "../../images/white_logo.svg";
 import styles from "./styles.module.scss";
 
 const navLinks = [
@@ -37,12 +38,12 @@ const footerLinks = [
 
 const footerIcons = [<InstagramIcon />, <TwitterIcon />, <FacebookIcon />];
 
-const Home = () => {
+const Main = () => {
 	return (
 		<div className={styles.container}>
 			<nav className={styles.navbar_container}>
 				<Link to="/" className={styles.nav_logo}>
-					<img src="./icons/white_logo.svg" alt="logo" />
+					<img src={logo} alt="logo" />
 				</Link>
 				<div className={styles.nav_links}>
 					{navLinks.map((link, index) => (
@@ -67,7 +68,7 @@ const Home = () => {
 			<footer className={styles.footer_container}>
 				<div className={styles.footer_1}>
 					<Link to="/" className={styles.footer_logo}>
-						<img src="./icons/white_logo.svg" alt="logo" />
+						<img src={logo} alt="logo" />
 					</Link>
 					<div className={styles.footer_1_links}>
 						<div className={styles.footer_heading}>Company</div>
@@ -119,4 +120,4 @@ const Home = () => {
 	);
 };
 
-export default Home;
+export default Main;

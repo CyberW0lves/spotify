@@ -29,6 +29,27 @@ code {
 	--dark-green: #15883e;
 	--light-gray: #616467;
 	--light-white: #919496;
-	--light-black: #222326;
+	--light-black: #282828;
 	--light-pink: #ffcdd2;
+	--mini-black: #181818;
+	--gradient-gray: #535353;
+
+	--error: #cc0000;
+	--toastify-toast-min-height: 5rem;
+}
+
+.Toastify__toast-theme--colored.Toastify__toast--success {
+	background-color: var(--blue);
+	font-size: 1.4rem;
+	font-weight: 600;
+	text-align: center;
+	border-radius: 1rem;
+}
+
+.Toastify__toast-theme--colored.Toastify__toast--error {
+	background-color: var(--error);
+	font-size: 1.4rem;
+	font-weight: 600;
+	text-align: center;
+	border-radius: 1rem;
 }

@@ -1,12 +1,15 @@
 import { useState } from "react";
 import Joi from "joi";
+import axios from "axios";
+import { toast } from "react-toastify";
+import { Link, useHistory } from "react-router-dom";
 import passwordComplexity from "joi-password-complexity";
-import { Link } from "react-router-dom";
-import TextField from "../Inputs/TextField";
-import Select from "../Inputs/Select";
-import Radio from "../Inputs/Radio";
-import Checkbox from "../Inputs/Checkbox";
-import Button from "../Button";
+import TextField from "../../components/Inputs/TextField";
+import Select from "../../components/Inputs/Select";
+import Radio from "../../components/Inputs/Radio";
+import Checkbox from "../../components/Inputs/Checkbox";
+import Button from "../../components/Button";
+import logo from "../../images/black_logo.svg";
 import styles from "./styles.module.scss";
 
 const months = [
@@ -36,29 +39,50 @@ const SignUp = () => {
 		date: "",
 		gender: "",
 	});
-
 	const [errors, setErrors] = useState({});
+	const [isFetching, setIsFetching] = useState(false);
+
+	const history = useHistory();
 
 	const handleInputState = (name, value) => {
-		setData({ ...data, [name]: value });
+		setData((data) => ({ ...data, [name]: value }));
 	};
 
 	const handleErrorState = (name, value) => {
 		value === ""
 			? delete errors[name]
-			: setErrors({ ...errors, [name]: value });
+			: setErrors(() => ({ ...errors, [name]: value }));
 	};
 
 	const schema = {
 		email: Joi.string().email({ tlds: false }).required().label("Email"),
 		password: passwordComplexity().required().label("Password"),
-		name: Joi.string().min(3).max(10).required().label("Name"),
+		name: Joi.string().min(5).max(10).required().label("Name"),
 	};
 
-	const handleSubmit = (e) => {
+	const handleSubmit = async (e) => {
 		e.preventDefault();
 		if (Object.keys(errors).length === 0) {
-			console.log("submitted sucessfully!");
+			try {
+				setIsFetching(true);
+				const url = process.env.REACT_APP_API_URL + "/users";
+				const { data: message } = await axios.post(url, data);
+				setIsFetching(false);
+				toast.success(message);
+				history.push("/login");
+			} catch (error) {
+				setIsFetching(false);
+				if (
+					error.response &&
+					error.response.status >= 400 &&
+					error.response.status < 500
+				) {
+					toast.error(error.response.data);
+				} else {
+					console.log(error);
+					toast.error("Something went wrong!");
+				}
+			}
 		} else {
 			console.log("please fill out properly");
 		}
@@ -67,7 +91,7 @@ const SignUp = () => {
 	return (
 		<div className={styles.container}>
 			<div className={styles.logo}>
-				<img src="./icons/black_logo.svg" alt="logo" />
+				<img src={logo} alt="logo" />
 			</div>
 			<h1 className={styles.heading}>Sign up for free to start listening.</h1>
 			<Button
@@ -178,7 +202,7 @@ const SignUp = () => {
 					<a href="/#">Spotify's Privacy Policy.</a>
 				</p>
 				<div className={styles.submit_btn_wrapper}>
-					<Button label="Sign Up" type="submit" />
+					<Button label="Sign Up" type="submit" isFetching={isFetching} />
 				</div>
 				<p className={styles.terms_condition} style={{ fontSize: "1.6rem" }}>
 					Have an account? <Link to="/login"> Log in.</Link>

@@ -1,17 +1,21 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { login } from "../../redux/authSlice/apiCalls";
 import Joi from "joi";
-import TextField from "../Inputs/TextField";
-import Checkbox from "../Inputs/Checkbox";
-import Button from "../Button";
+import TextField from "../../components/Inputs/TextField";
+import Checkbox from "../../components/Inputs/Checkbox";
+import Button from "../../components/Button";
 import FacebookRoundedIcon from "@mui/icons-material/FacebookRounded";
 import AppleIcon from "@mui/icons-material/Apple";
 import GoogleIcon from "@mui/icons-material/Google";
+import logo from "../../images/black_logo.svg";
 import styles from "./styles.module.scss";
 
 const Login = () => {
 	const [data, setData] = useState({ email: "", password: "" });
 	const [errors, setErrors] = useState({});
+	const dispatch = useDispatch();
 
 	const handleInputState = (name, value) => {
 		setData({ ...data, [name]: value });
@@ -28,10 +32,10 @@ const Login = () => {
 		password: Joi.string().required().label("Password"),
 	};
 
-	const handleSubmit = (e) => {
+	const handleSubmit = async (e) => {
 		e.preventDefault();
 		if (Object.keys(errors).length === 0) {
-			console.log("submitted sucessfully!");
+			login(data, dispatch);
 		} else {
 			console.log("please fill out properly");
 		}
@@ -41,7 +45,7 @@ const Login = () => {
 		<div className={styles.container}>
 			<div className={styles.logo_container}>
 				<Link to="/">
-					<img src="./icons/black_logo.svg" alt="logo" />
+					<img src={logo} alt="logo" />
 				</Link>
 			</div>
 			<main className={styles.main}>
