@@ -1,0 +1,30 @@
+.container {
+	margin: 2rem;
+
+	.heading {
+		display: flex;
+		align-items: center;
+		font-size: 2.5rem;
+		margin: 0 0 2rem 0;
+
+		svg {
+			width: 3rem;
+			height: 3rem;
+			margin-left: 0.5rem;
+		}
+	}
+
+	.form_container {
+		border-radius: 1rem;
+		width: 55rem;
+		padding: 2rem;
+
+		.input_container {
+			margin: 0.5rem 0;
+		}
+
+		.file_container {
+			margin: 2rem 0;
+		}
+	}
+}

@@ -1,43 +1,55 @@
-import { Fragment } from "react";
-import { Route, Switch, useLocation } from "react-router-dom";
-import Dashboard from "./components/Dashboard";
-import Navbar from "./components/Navbar";
+import { Fragment, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { Route, Switch, Redirect } from "react-router-dom";
+import { getAllSongs } from "./redux/songsSlice/apiCalls";
+import { getAllUsers } from "./redux/usersSlice/apiCalls";
 import Sidebar from "./components/Sidebar";
-import Songs from "./components/Songs";
-import Users from "./components/Users";
-import Login from "./components/Forms/Login";
-import { ThemeProvider, createTheme } from "@material-ui/core";
-import "./App.scss";
-
-const theme = createTheme({
-	palette: {
-		primary: {
-			main: "#8abef5",
-		},
-	},
-});
+import Navbar from "./components/Navbar";
+import Dashboard from "./pages/Dashboard";
+import Login from "./pages/Login";
+import Users from "./pages/Users";
+import Songs from "./pages/Songs";
+import SongForm from "./components/Forms/SongForm";
+import UserForm from "./components/Forms/UserForm";
 
 function App() {
-	const location = useLocation();
-	console.log(location.pathname);
+	const user = useSelector((state) => state.auth.user);
+	const dispatch = useDispatch();
+
+	useEffect(() => {
+		let token = null;
+		const root = JSON.parse(window.localStorage.getItem("persist:root"));
+
+		if (root) {
+			const { auth } = root;
+			const { user } = JSON.parse(auth);
+			if (user) token = user.token;
+		}
+
+		if (user && token) {
+			getAllSongs(dispatch);
+			getAllUsers(dispatch);
+		}
+	}, [dispatch, user]);
 
 	return (
-		<ThemeProvider theme={theme}>
-			{location.pathname !== "/login" && (
+		<Switch>
+			<Route path="/login" component={Login} />
+			{user && user.isAdmin && (
 				<Fragment>
 					<Navbar />
 					<Sidebar />
+					<main className="main">
+						<Route exact path="/" component={Dashboard} />
+						<Route path="/songs/:id" component={SongForm} />
+						<Route path="/users/:id" component={UserForm} />
+						<Route exact path="/users" component={Users} />
+						<Route exact path="/songs" component={Songs} />
+					</main>
 				</Fragment>
 			)}
-			<div className="container">
-				<Switch>
-					<Route path="/" exact component={Dashboard} />
-					<Route path="/songs" component={Songs} />
-					<Route path="/users" component={Users} />
-					<Route path="/login" component={Login} />
-				</Switch>
-			</div>
-		</ThemeProvider>
+			{!user && <Redirect to="/login" />}
+		</Switch>
 	);
 }
 

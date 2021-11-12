@@ -1,0 +1,25 @@
+.container {
+	margin: 2rem;
+
+	.head {
+		display: flex;
+		align-items: flex-start;
+		justify-content: space-between;
+		padding: 1rem;
+		margin-bottom: 2.5rem;
+
+		h1 {
+			display: flex;
+			align-items: center;
+			margin: 0;
+			font-size: 2.4rem;
+			text-transform: capitalize;
+
+			svg {
+				width: 3rem;
+				height: 3rem;
+				margin-left: 0.5rem;
+			}
+		}
+	}
+}

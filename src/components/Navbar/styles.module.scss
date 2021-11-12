@@ -3,7 +3,29 @@
 	height: 60px;
 	position: fixed;
 	top: 0;
-	box-shadow: 0 3px 6px rgb(0 0 0 / 12%);
 	z-index: 99;
-	background-color: white;
+	background-color: var(--blue-black);
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+
+	.left {
+		display: flex;
+		align-items: center;
+		color: var(--white);
+
+		p {
+			text-transform: capitalize;
+			font-size: 1.8rem;
+			font-weight: 500;
+			color: white;
+			margin-right: 1rem;
+		}
+
+		svg {
+			width: 3rem;
+			height: 3rem;
+			margin-right: 2rem;
+		}
+	}
 }

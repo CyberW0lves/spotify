@@ -1,0 +1,61 @@
+.table_container {
+	border-radius: 1rem !important;
+
+	table {
+		thead {
+			background-color: var(--blue-black);
+
+			th {
+				line-height: 3rem;
+				font-size: 1.4rem;
+				color: var(--white);
+				text-transform: capitalize;
+				font-weight: 500;
+			}
+		}
+
+		tbody {
+			td {
+				font-size: 1.2rem;
+				color: var(--black);
+				font-weight: 500;
+
+				.edit_btn {
+					color: var(--blue-black);
+					svg {
+						width: 2rem;
+						height: 2rem;
+					}
+				}
+
+				.delete_btn {
+					color: var(--error);
+					svg {
+						width: 2rem;
+						height: 2rem;
+					}
+				}
+
+				.play_btn {
+					color: var(--primary);
+					svg {
+						width: 3rem;
+						height: 3rem;
+					}
+				}
+
+				.song_img {
+					width: 3rem;
+					height: 3rem;
+					border-radius: 50%;
+					object-fit: contain;
+				}
+			}
+		}
+	}
+
+	.no_data_img {
+		width: 20rem;
+		margin-left: -25rem;
+	}
+}

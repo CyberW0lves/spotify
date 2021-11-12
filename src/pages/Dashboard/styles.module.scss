@@ -1,0 +1,56 @@
+.container {
+	padding: 2rem;
+	.head {
+		display: flex;
+		justify-content: space-between;
+
+		.card {
+			width: 25rem;
+			height: 10rem;
+			padding: 0 3rem;
+			display: flex;
+			align-items: center;
+
+			svg {
+				width: 3.5rem;
+				height: 3.5rem;
+			}
+
+			span {
+				font-size: 2rem;
+				text-transform: capitalize;
+				font-weight: 600;
+				padding-left: 0.5rem;
+			}
+
+			p {
+				margin: 0;
+				margin-left: auto;
+				font-size: 3rem;
+				font-weight: 600;
+			}
+		}
+	}
+
+	.body {
+		margin-top: 2rem;
+
+		.table_wrap {
+			margin: 3rem 0;
+
+			h1 {
+				font-weight: 500;
+				font-size: 2rem;
+				display: flex;
+				align-items: center;
+				text-transform: capitalize;
+				color: var(--blue-black);
+				svg {
+					width: 2rem;
+					height: 2rem;
+					margin-right: 1rem;
+				}
+			}
+		}
+	}
+}
