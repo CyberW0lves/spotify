@@ -43,7 +43,7 @@ const Navbar = () => {
 					onClick={() => setMenu(!menu)}
 				>
 					<AccountCircleIcon />
-					<p>{user.name}</p>
+					<p>{user && user.name}</p>
 					{menu ? <ArrowDropUpIcon /> : <ArrowDropDownIcon />}
 				</div>
 			</div>

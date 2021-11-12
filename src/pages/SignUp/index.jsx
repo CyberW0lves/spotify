@@ -66,9 +66,9 @@ const SignUp = () => {
 			try {
 				setIsFetching(true);
 				const url = process.env.REACT_APP_API_URL + "/users";
-				const { data: message } = await axios.post(url, data);
+				await axios.post(url, data);
 				setIsFetching(false);
-				toast.success(message);
+				toast.success("Account created successfully");
 				history.push("/login");
 			} catch (error) {
 				setIsFetching(false);
