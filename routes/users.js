@@ -32,7 +32,7 @@ router.get("/", admin, async (req, res) => {
 });
 
 // get user by id
-router.get("/:id", auth, async (req, res) => {
+router.get("/:id", [validateObjectId, auth], async (req, res) => {
 	const user = await User.findById(req.params.id).select("-password -__v");
 	res.status(200).send(user);
 });
@@ -48,7 +48,7 @@ router.put("/:id", [validateObjectId, auth], async (req, res) => {
 });
 
 // delete user by id
-router.delete("/:id", admin, async (req, res) => {
+router.delete("/:id", [validateObjectId, admin], async (req, res) => {
 	await User.findByIdAndDelete(req.params.id);
 	res.status(200).send("Successfully deleted user.");
 });

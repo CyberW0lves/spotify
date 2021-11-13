@@ -92,7 +92,7 @@ router.get("/random", auth, async (req, res) => {
 	res.status(200).send(playlists);
 });
 
-router.get("/:id", auth, async (req, res) => {
+router.get("/:id", [validateObjectId, auth], async (req, res) => {
 	const playlist = await PlayList.findById(req.params.id);
 	if (!playlist) return res.status(404).send("not found");
 
@@ -105,7 +105,7 @@ router.get("/", auth, async (req, res) => {
 	res.status(200).send(playlists);
 });
 
-router.delete("/:id", auth, async (req, res) => {
+router.delete("/:id", [validateObjectId, auth], async (req, res) => {
 	const user = await User.findById(req.user._id);
 	const playlist = await PlayList.findById(req.params.id);
 	if (!user._id.equals(playlist.user))

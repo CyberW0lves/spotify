@@ -11,7 +11,7 @@ router.post("/", admin, async (req, res) => {
 	if (error) res.status(400).send(error.details[0].message);
 
 	const data = await Song(req.body).save();
-	res.status(201).send({ data, message: "song created successfully" });
+	res.status(201).send(data);
 });
 
 // Get all songs
@@ -21,7 +21,7 @@ router.get("/", async (req, res) => {
 });
 
 // Update song
-router.put("/:id", admin, async (req, res) => {
+router.put("/:id", [validateObjectId, admin], async (req, res) => {
 	const song = await Song.findByIdAndUpdate(req.params.id, req.body, {
 		new: true,
 	});
@@ -29,7 +29,7 @@ router.put("/:id", admin, async (req, res) => {
 });
 
 // Delete song by ID
-router.delete("/:id", admin, async (req, res) => {
+router.delete("/:id", [validateObjectId, admin], async (req, res) => {
 	await Song.findByIdAndDelete(req.params.id);
 	res.status(200).send("Song deleted sucessfully");
 });
