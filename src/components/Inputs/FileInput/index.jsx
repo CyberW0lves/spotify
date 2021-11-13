@@ -44,6 +44,17 @@ const FileInput = ({
 			() => {
 				getDownloadURL(uploadTask.snapshot.ref).then((url) => {
 					handleInputState(name, url);
+					if (type === "audio") {
+						const audio = new Audio(url);
+						audio.addEventListener(
+							"loadedmetadata",
+							() => {
+								const duration = Math.floor(audio.duration);
+								handleInputState("duration", duration);
+							},
+							false
+						);
+					}
 				});
 			}
 		);

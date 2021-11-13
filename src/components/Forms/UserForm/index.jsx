@@ -65,15 +65,14 @@ const UserForm = () => {
 	useEffect(() => {
 		if (id !== "new" && users) {
 			const user = users.filter((user) => user._id === id);
-			const obj = {
+			setData({
 				email: user[0].email,
 				name: user[0].name,
 				month: user[0].month,
 				year: user[0].year,
 				date: user[0].date,
 				gender: user[0].gender,
-			};
-			setData(obj);
+			});
 		}
 	}, [id, users]);
 

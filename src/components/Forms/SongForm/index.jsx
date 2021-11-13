@@ -13,23 +13,28 @@ import ImageIcon from "@mui/icons-material/Image";
 import styles from "./styles.module.scss";
 
 const SongForm = () => {
-	const [name, setName] = useState("");
-	const [artist, setArtist] = useState("");
-	const [img, setImg] = useState(null);
-	const [song, setSong] = useState(null);
+	const [data, setData] = useState({
+		name: "",
+		artist: "",
+		img: null,
+		song: null,
+		duration: 0,
+	});
 	const [errors, setErrors] = useState({ name: "", artist: "" });
-	const { isFetching, songs } = useSelector((state) => state.songs);
+	const { songs } = useSelector((state) => state.songs);
 	const { id } = useParams();
 	const dispatch = useDispatch();
 	const history = useHistory();
 
 	useEffect(() => {
-		if (id !== "new") {
-			const data = songs.filter((song) => song._id === id);
-			setName(data[0].name);
-			setArtist(data[0].artist);
-			setSong(data[0].song);
-			setImg(data[0].img);
+		const song = songs.filter((song) => song._id === id);
+		if (id !== "new" && song[0]) {
+			setData({
+				name: song[0].name,
+				artist: song[0].artist,
+				song: song[0].song,
+				img: song[0].img,
+			});
 		}
 	}, [id, songs]);
 
@@ -38,15 +43,19 @@ const SongForm = () => {
 		artist: Joi.string().required().label("Artist"),
 		img: Joi.string().required().label("Image"),
 		song: Joi.string().required().label("Song"),
+		duration: Joi.number().required(),
+	};
+
+	const handleInputState = (name, value) => {
+		setData((prev) => ({ ...prev, [name]: value }));
 	};
 
 	const handleErrorState = (name, value) => {
-		setErrors({ ...errors, [name]: value });
+		setErrors((prev) => ({ ...prev, [name]: value }));
 	};
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		const data = { name, artist, img, song };
 		const { error } = Joi.object(schema).validate(data);
 		if (!error) {
 			if (id === "new") {
@@ -72,11 +81,11 @@ const SongForm = () => {
 						<TextField
 							name="name"
 							label="Enter song name"
-							handleInputState={(name, value) => setName(value)}
+							handleInputState={handleInputState}
 							handleErrorState={handleErrorState}
 							schema={schema.name}
 							error={errors.name}
-							value={name}
+							value={data.name}
 							required={true}
 						/>
 					</div>
@@ -84,9 +93,9 @@ const SongForm = () => {
 						<TextField
 							name="artist"
 							label="Artist name"
-							handleInputState={(name, value) => setArtist(value)}
+							handleInputState={handleInputState}
 							required={true}
-							value={artist}
+							value={data.artist}
 							handleErrorState={handleErrorState}
 							schema={schema.artist}
 							error={errors.artist}
@@ -98,8 +107,8 @@ const SongForm = () => {
 							icon={<MusicNoteIcon />}
 							type="audio"
 							name="song"
-							handleInputState={(name, value) => setSong(value)}
-							value={song}
+							handleInputState={handleInputState}
+							value={data.song}
 						/>
 					</div>
 					<div className={styles.file_container}>
@@ -108,15 +117,14 @@ const SongForm = () => {
 							icon={<ImageIcon />}
 							type="image"
 							name="img"
-							value={img}
-							handleInputState={(name, value) => setImg(value)}
+							value={data.img}
+							handleInputState={handleInputState}
 						/>
 					</div>
 					<Button
 						type="submit"
 						label={id === "new" ? "Submit" : "Update"}
 						style={{ marginLeft: "auto" }}
-						isFetching={isFetching}
 					/>
 				</form>
 			</Paper>
