@@ -50,7 +50,7 @@ const Song = ({ song, playlist, handleRemoveSong }) => {
 			</div>
 			<div className={styles.right}>
 				<Like songId={song._id} />
-				<p>0:00</p>
+				<p>{song.duration}</p>
 				<IconButton className={styles.menu_btn} onClick={() => setMenu(true)}>
 					<MoreHorizIcon />
 				</IconButton>
