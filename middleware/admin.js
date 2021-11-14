@@ -6,10 +6,12 @@ module.exports = (req, res, next) => {
 
 	jwt.verify(token, process.env.JWTPRIVATEKEY, (err, validToken) => {
 		if (err) {
-			return res.status(400).send("invalid token");
+			return res.status(400).send({ message: "invalid token" });
 		} else {
 			if (!validToken.isAdmin)
-				return res.status(403).send("You don't have access to this content!");
+				return res
+					.status(403)
+					.send({ message: "You don't have access to this content!" });
 
 			req.user = validToken;
 			next();

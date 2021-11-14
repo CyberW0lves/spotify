@@ -8,10 +8,13 @@ const validateObjectId = require("../middleware/validateObjectId");
 // create user
 router.post("/", async (req, res) => {
 	const { error } = validate(req.body);
-	if (error) return res.status(400).send(error.details[0].message);
+	if (error) return res.status(400).send({ message: error.details[0].message });
 
 	const user = await User.findOne({ email: req.body.email });
-	if (user) return res.status(403).send("User with given email already Exist!");
+	if (user)
+		return res
+			.status(403)
+			.send({ message: "User with given email already Exist!" });
 
 	const salt = await bcrypt.genSalt(Number(process.env.SALT));
 	const hashPassword = await bcrypt.hash(req.body.password, salt);
@@ -22,19 +25,21 @@ router.post("/", async (req, res) => {
 
 	newUser.password = undefined;
 	newUser.__v = undefined;
-	res.status(200).send(newUser);
+	res
+		.status(200)
+		.send({ data: newUser, message: "Account created successfully" });
 });
 
 // get all users
 router.get("/", admin, async (req, res) => {
 	const users = await User.find().select("-password -__v");
-	res.status(200).send(users);
+	res.status(200).send({ data: users });
 });
 
 // get user by id
 router.get("/:id", [validateObjectId, auth], async (req, res) => {
 	const user = await User.findById(req.params.id).select("-password -__v");
-	res.status(200).send(user);
+	res.status(200).send({ data: user });
 });
 
 // update user by id
@@ -44,13 +49,13 @@ router.put("/:id", [validateObjectId, auth], async (req, res) => {
 		{ $set: req.body },
 		{ new: true }
 	).select("-password -__v");
-	res.status(200).send(user);
+	res.status(200).send({ data: user });
 });
 
 // delete user by id
 router.delete("/:id", [validateObjectId, admin], async (req, res) => {
 	await User.findByIdAndDelete(req.params.id);
-	res.status(200).send("Successfully deleted user.");
+	res.status(200).send({ message: "Successfully deleted user." });
 });
 
 module.exports = router;
