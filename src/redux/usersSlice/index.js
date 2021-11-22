@@ -4,7 +4,10 @@ export const usersSlice = createSlice({
 	name: "users",
 	initialState: {
 		users: null,
-		isFetching: false,
+		getUsersProgress: false,
+		createUserProgress: false,
+		updateUserProgress: false,
+		deleteUserProgress: false,
 		error: false,
 	},
 	reducers: {

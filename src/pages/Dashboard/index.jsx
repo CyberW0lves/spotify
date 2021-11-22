@@ -1,6 +1,4 @@
 import { useSelector } from "react-redux";
-import { useEffect, useState } from "react";
-import axiosInstance from "../../redux/axiosInstance";
 import { Link } from "react-router-dom";
 import UserTable from "../../components/Tables/UserTable";
 import SongTable from "../../components/Tables/SongTable";
@@ -15,16 +13,7 @@ import styles from "./styles.module.scss";
 const Dashboard = () => {
 	const { users } = useSelector((state) => state.users);
 	const { songs } = useSelector((state) => state.songs);
-	const [playlists, setPlaylists] = useState([]);
-
-	const getAllPlaylists = async () => {
-		const { data } = await axiosInstance.get("/playlists");
-		setPlaylists(data);
-	};
-
-	useEffect(() => {
-		getAllPlaylists();
-	}, []);
+	const { playlists } = useSelector((state) => state.playlists);
 
 	return (
 		<div className={styles.container}>
@@ -42,7 +31,7 @@ const Dashboard = () => {
 				<Paper className={styles.card}>
 					<LibraryMusicIcon />
 					<span>Playlists</span>
-					<p>{playlists.length}</p>
+					<p>{playlists && playlists.length}</p>
 				</Paper>
 			</div>
 			<div className={styles.body}>

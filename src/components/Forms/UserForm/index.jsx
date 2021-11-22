@@ -40,7 +40,9 @@ const UserForm = () => {
 		date: "",
 		gender: "",
 	});
-	const { users } = useSelector((state) => state.users);
+	const { users, createUserProgress, updateUserProgress } = useSelector(
+		(state) => state.users
+	);
 	const [errors, setErrors] = useState({});
 	const { id } = useParams();
 	const dispatch = useDispatch();
@@ -189,6 +191,7 @@ const UserForm = () => {
 					<Button
 						type="submit"
 						label={id === "new" ? "Submit" : "Update"}
+						isFetching={id === "new" ? createUserProgress : updateUserProgress}
 						style={{ marginLeft: "auto" }}
 					/>
 				</form>

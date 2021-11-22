@@ -8,8 +8,10 @@ export const createSong = async (song, dispatch) => {
 		const { data } = await axiosInstance.post("/songs", song);
 		dispatch(actions.createSongSuccess(data.data));
 		toast.success(data.message);
+		return true;
 	} catch (error) {
 		dispatch(actions.createSongFailure());
+		return false;
 	}
 };
 
@@ -17,9 +19,11 @@ export const getAllSongs = async (dispatch) => {
 	dispatch(actions.getAllSongsStart());
 	try {
 		const { data } = await axiosInstance.get("/songs");
-		dispatch(actions.getAllSongsSuccess(data));
+		dispatch(actions.getAllSongsSuccess(data.data));
+		return true;
 	} catch (error) {
 		dispatch(actions.getAllSongsFailure());
+		return false;
 	}
 };
 
@@ -27,9 +31,12 @@ export const updateSong = async (id, song, dispatch) => {
 	dispatch(actions.updateSongStart());
 	try {
 		const { data } = await axiosInstance.put(`/songs/${id}`, song);
-		dispatch(actions.updateSongSuccess(data));
+		dispatch(actions.updateSongSuccess(data.data));
+		toast.success(data.message);
+		return true;
 	} catch (error) {
 		dispatch(actions.updateSongFailure());
+		return false;
 	}
 };
 
@@ -38,8 +45,10 @@ export const deleteSong = async (id, dispatch) => {
 	try {
 		const { data } = await axiosInstance.delete(`/songs/${id}`);
 		dispatch(actions.deleteSongSuccess(id));
-		toast.success(data);
+		toast.success(data.message);
+		return true;
 	} catch (error) {
 		dispatch(actions.deleteSongFailure());
+		return false;
 	}
 };

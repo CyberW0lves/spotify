@@ -4,59 +4,62 @@ export const songsSlice = createSlice({
 	name: "songs",
 	initialState: {
 		songs: [],
-		isFetching: false,
+		createSongProgress: false,
+		getAllSongsProgress: false,
+		updateSongProgress: false,
+		deleteSongProgress: false,
 		error: false,
 	},
 	reducers: {
 		createSongStart: (state) => {
-			state.isFetching = true;
+			state.createSongProgress = true;
 		},
 		createSongSuccess: (state, action) => {
 			state.songs.push(action.payload);
-			state.isFetching = false;
+			state.createSongProgress = false;
 		},
 		createSongFailure: (state) => {
 			state.error = true;
-			state.isFetching = false;
+			state.createSongProgress = false;
 		},
 
 		getAllSongsStart: (state) => {
-			state.isFetching = true;
+			state.getAllSongsProgress = true;
 		},
 		getAllSongsSuccess: (state, action) => {
 			state.songs = action.payload;
-			state.isFetching = false;
+			state.getAllSongsProgress = false;
 		},
 		getAllSongsFailure: (state) => {
 			state.error = true;
-			state.isFetching = false;
+			state.getAllSongsProgress = false;
 		},
 
 		updateSongStart: (state) => {
-			state.isFetching = true;
+			state.updateSongProgress = true;
 		},
 		updateSongSuccess: (state, action) => {
 			const index = state.songs.findIndex(
 				(song) => song._id === action.payload._id
 			);
 			state.songs[index] = action.payload;
-			state.isFetching = false;
+			state.updateSongProgress = false;
 		},
 		updateSongFailure: (state) => {
 			state.error = true;
-			state.isFetching = false;
+			state.updateSongProgress = false;
 		},
 
 		deleteSongStart: (state) => {
-			state.isFetching = true;
+			state.deleteSongProgress = true;
 		},
 		deleteSongSuccess: (state, action) => {
 			state.songs = state.songs.filter((song) => song._id !== action.payload);
-			state.isFetching = false;
+			state.deleteSongProgress = false;
 		},
 		deleteSongFailure: (state) => {
 			state.error = true;
-			state.isFetching = false;
+			state.deleteSongProgress = false;
 		},
 	},
 });

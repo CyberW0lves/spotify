@@ -11,19 +11,19 @@ export const login = async (user, dispatch) => {
 		const url = apiUrl;
 		const { data } = await axios.post(url, user);
 
-		const decodeData = jwt_decode(data);
+		const decodeData = jwt_decode(data.data);
 		if (!decodeData.isAdmin) {
 			toast.error("You don't have access");
 			dispatch(loginFailure());
 			return;
 		}
-		toast.success("Signing in please wait...");
-		dispatch(loginSuccess({ ...decodeData, token: data }));
+		toast.success(data.message);
+		dispatch(loginSuccess({ ...decodeData, token: data.data }));
 		window.location = "/";
 	} catch (error) {
 		dispatch(loginFailure());
 		if (error.response.status >= 400 && error.response.status < 500) {
-			toast.error(error.response.data);
+			toast.error(error.response.data.message);
 		}
 	}
 };

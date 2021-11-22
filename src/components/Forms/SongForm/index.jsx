@@ -21,7 +21,9 @@ const SongForm = () => {
 		duration: 0,
 	});
 	const [errors, setErrors] = useState({ name: "", artist: "" });
-	const { songs } = useSelector((state) => state.songs);
+	const { songs, createSongProgress, updateSongProgress } = useSelector(
+		(state) => state.songs
+	);
 	const { id } = useParams();
 	const dispatch = useDispatch();
 	const history = useHistory();
@@ -54,16 +56,16 @@ const SongForm = () => {
 		setErrors((prev) => ({ ...prev, [name]: value }));
 	};
 
-	const handleSubmit = (e) => {
+	const handleSubmit = async (e) => {
 		e.preventDefault();
 		const { error } = Joi.object(schema).validate(data);
 		if (!error) {
 			if (id === "new") {
-				createSong(data, dispatch);
-				history.push("/songs");
+				const res = await createSong(data, dispatch);
+				res && history.push("/songs");
 			} else {
-				updateSong(id, data, dispatch);
-				history.push("/songs");
+				const res = await updateSong(id, data, dispatch);
+				res && history.push("/songs");
 			}
 		} else {
 			toast.error(error.message);
@@ -124,6 +126,7 @@ const SongForm = () => {
 					<Button
 						type="submit"
 						label={id === "new" ? "Submit" : "Update"}
+						isFetching={id === "new" ? createSongProgress : updateSongProgress}
 						style={{ marginLeft: "auto" }}
 					/>
 				</form>

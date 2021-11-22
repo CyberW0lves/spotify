@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { Route, Switch, Redirect } from "react-router-dom";
 import { getAllSongs } from "./redux/songsSlice/apiCalls";
 import { getAllUsers } from "./redux/usersSlice/apiCalls";
+import { getAllPlaylists } from "./redux/playlistSlice/apiCalls";
 import Sidebar from "./components/Sidebar";
 import Navbar from "./components/Navbar";
 import Dashboard from "./pages/Dashboard";
@@ -29,6 +30,7 @@ function App() {
 		if (user && token) {
 			getAllSongs(dispatch);
 			getAllUsers(dispatch);
+			getAllPlaylists(dispatch);
 		}
 	}, [dispatch, user]);
 
