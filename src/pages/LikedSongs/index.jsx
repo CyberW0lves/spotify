@@ -2,21 +2,26 @@ import { useState, useEffect, Fragment } from "react";
 import { useSelector } from "react-redux";
 import Song from "../../components/Song";
 import axiosInstance from "../../redux/axiosInstance";
+import { CircularProgress } from "@mui/material";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import styles from "./styles.module.scss";
 import likeImg from "../../images/like.jpg";
 
 const LikedSongs = () => {
 	const [songs, setSongs] = useState([]);
+	const [isFetching, setIsFetching] = useState(false);
 	const { user } = useSelector((state) => state.user);
 
 	const getLikedSongs = async () => {
 		try {
+			setIsFetching(true);
 			const url = process.env.REACT_APP_API_URL + `/songs/like`;
 			const { data } = await axiosInstance.get(url);
-			setSongs(data);
+			setSongs(data.data);
+			setIsFetching(false);
 		} catch (error) {
 			console.log(error);
+			setIsFetching(false);
 		}
 	};
 
@@ -48,11 +53,21 @@ const LikedSongs = () => {
 						<AccessTimeIcon />
 					</div>
 				</div>
-				{songs.map((song) => (
-					<Fragment key={song._id}>
-						{user.likedSongs.indexOf(song._id) !== -1 && <Song song={song} />}
+				{isFetching ? (
+					<div className={styles.progress_container}>
+						<CircularProgress style={{ color: "#1ed760" }} size="5rem" />
+					</div>
+				) : (
+					<Fragment>
+						{songs.map((song) => (
+							<Fragment key={song._id}>
+								{user.likedSongs.indexOf(song._id) !== -1 && (
+									<Song song={song} />
+								)}
+							</Fragment>
+						))}
 					</Fragment>
-				))}
+				)}
 			</div>
 		</div>
 	);

@@ -4,72 +4,76 @@ export const playListSlice = createSlice({
 	name: "playlists",
 	initialState: {
 		playlists: [],
-		isFetching: false,
+		createPlayListProgress: false,
+		getPlayListProgress: false,
+		addSongProgress: false,
+		removeSongProgress: false,
+		deletePlayListProgress: false,
 		error: false,
 	},
 	reducers: {
 		createPlayListStart: (state) => {
-			state.isFetching = true;
+			state.createPlayListProgress = true;
 		},
 		createPlayListSuccess: (state, action) => {
 			state.playlists.push(action.payload);
-			state.isFetching = false;
+			state.createPlayListProgress = false;
 		},
 		createPlayListFailure: (state) => {
 			state.error = true;
-			state.isFetching = false;
+			state.createPlayListProgress = false;
 		},
 
 		getPlayListStart: (state) => {
-			state.isFetching = true;
+			state.getPlayListProgress = true;
 		},
 		getPlayListSuccess: (state, action) => {
 			state.playlists = action.payload;
-			state.isFetching = false;
+			state.getPlayListProgress = false;
 		},
 		getPlayListFailure: (state) => {
 			state.error = true;
-			state.isFetching = false;
+			state.getPlayListProgress = false;
 		},
 
 		addSongStart: (state) => {
-			state.isFetching = true;
+			state.addSongProgress = true;
 		},
 		addSongSuccess: (state, action) => {
 			const index = state.playlists.indexOf(action.payload._id);
 			state.playlists[index] = action.payload;
-			state.isFetching = false;
+			state.addSongProgress = false;
 		},
 		addSongFailure: (state) => {
 			state.error = true;
-			state.isFetching = false;
+			state.addSongProgress = false;
 		},
 
 		removeSongStart: (state) => {
-			state.isFetching = true;
+			state.removeSongProgress = true;
 		},
 		removeSongSuccess: (state, action) => {
 			const index = state.playlists.indexOf(action.payload._id);
 			state.playlists[index] = action.payload;
-			state.isFetching = false;
+			state.removeSongProgress = false;
 		},
 		removeSongFailure: (state) => {
 			state.error = true;
-			state.isFetching = false;
+			state.removeSongProgress = false;
 		},
 
 		deletePlayListStart: (state) => {
-			state.isFetching = true;
+			state.deletePlayListProgress = true;
 		},
 		deletePlayListSuccess: (state, action) => {
 			state.playlists = state.playlists.filter(
 				(playlist) => playlist._id !== action.payload
 			);
-			state.isFetching = false;
+			state.deletePlayListProgress = false;
 		},
 		deletePlayListFailure: (state) => {
 			state.error = true;
-			state.isFetching = false;
+			state.deletePlayListProgress = false;
 		},
 	},
 });

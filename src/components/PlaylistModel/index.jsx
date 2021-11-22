@@ -15,6 +15,7 @@ const PlaylistModel = ({ closeModel, playlist }) => {
 		desc: "",
 		img: "",
 	});
+	const [isFetching, setIsFetching] = useState(false);
 
 	useEffect(() => {
 		setData({ name: playlist.name, desc: playlist.desc, img: playlist.img });
@@ -27,12 +28,15 @@ const PlaylistModel = ({ closeModel, playlist }) => {
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		try {
+			setIsFetching(true);
 			const url =
 				process.env.REACT_APP_API_URL + `/playlists/edit/${playlist._id}`;
 			await axiosInstance.put(url, data);
 			toast.success("success");
+			setIsFetching(false);
 			window.location.reload();
 		} catch (error) {
+			setIsFetching(false);
 			console.log(error);
 		}
 	};
@@ -72,6 +76,7 @@ const PlaylistModel = ({ closeModel, playlist }) => {
 				<Button
 					label="Submit"
 					onClick={handleSubmit}
+					isFetching={isFetching}
 					style={{
 						position: "absolute",
 						bottom: "0",

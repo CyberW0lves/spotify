@@ -4,46 +4,48 @@ export const userSlice = createSlice({
 	name: "user",
 	initialState: {
 		user: null,
-		isFetching: false,
+		getUserProgress: false,
+		updateUserProgress: false,
+		likeSongProgress: false,
 		error: false,
 	},
 	reducers: {
 		getUserStart: (state) => {
-			state.isFetching = true;
+			state.getUserProgress = true;
 		},
 		getUserSuccess: (state, action) => {
 			state.user = action.payload;
-			state.isFetching = false;
+			state.getUserProgress = false;
 		},
 		getUserFailure: (state) => {
-			state.isFetching = false;
+			state.getUserProgress = false;
 			state.error = true;
 		},
 
 		updateUserStart: (state) => {
-			state.isFetching = true;
+			state.updateUserProgress = true;
 		},
 		updateUserSuccess: (state, action) => {
 			state.user = action.payload;
-			state.isFetching = false;
+			state.updateUserProgress = false;
 		},
 		updateUserFailure: (state) => {
-			state.isFetching = false;
+			state.updateUserProgress = false;
 			state.error = true;
 		},
 
 		likeSongStart: (state) => {
-			state.isFetching = true;
+			state.likeSongProgress = true;
 		},
 		likeSongSuccess: (state, action) => {
 			const index = state.user.likedSongs.indexOf(action.payload);
 			index === -1
 				? state.user.likedSongs.push(action.payload)
 				: state.user.likedSongs.splice(index, 1);
-			state.isFetching = false;
+			state.likeSongProgress = false;
 		},
 		likeSongFailure: (state) => {
-			state.isFetching = false;
+			state.likeSongProgress = false;
 			state.error = true;
 		},
 	},

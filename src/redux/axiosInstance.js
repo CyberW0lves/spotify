@@ -28,7 +28,7 @@ axiosInstance.interceptors.request.use(
 			error.response.status >= 400 &&
 			error.response.status < 500
 		) {
-			toast.error(error.response.data);
+			toast.error(error.response.data.message);
 		} else {
 			console.log(error);
 			toast.error("Something went wrong!");

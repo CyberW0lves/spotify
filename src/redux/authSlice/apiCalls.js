@@ -3,18 +3,17 @@ import jwt_decode from "jwt-decode";
 import { toast } from "react-toastify";
 import { loginStart, loginSuccess, loginFailure } from "./index";
 
-const apiUrl = process.env.REACT_APP_API_URL + "/login";
-
-export const login = async (user, dispatch) => {
+export const login = async (payload, dispatch) => {
 	dispatch(loginStart());
 	try {
-		const url = apiUrl;
-		const { data } = await axios.post(url, user);
+		const url = process.env.REACT_APP_API_URL + "/login";
+		const { data } = await axios.post(url, payload);
 
-		const decodeData = jwt_decode(data);
-		dispatch(loginSuccess({ ...decodeData, token: data }));
+		const decodeData = jwt_decode(data.data);
+		dispatch(loginSuccess({ ...decodeData, token: data.data }));
+		toast.success(data.message);
 		window.location = "/home";
-		toast.success("Signing in please wait...");
+		return true;
 	} catch (error) {
 		dispatch(loginFailure());
 		if (
@@ -22,10 +21,11 @@ export const login = async (user, dispatch) => {
 			error.response.status >= 400 &&
 			error.response.status < 500
 		) {
-			toast.error(error.response.data);
+			toast.error(error.response.data.message);
 		} else {
 			console.log(error);
 			toast.error("Something went wrong!");
 		}
+		return false;
 	}
 };

@@ -13,7 +13,7 @@ const Home = () => {
 			setIsFetching(true);
 			const url = process.env.REACT_APP_API_URL + "/playlists/random";
 			const { data } = await axiosInstance.get(url);
-			const newarray = data.splice(0, 4);
+			const newarray = data.data.splice(0, 4);
 			setPlaylists(newarray);
 			setIsFetching(false);
 		} catch (error) {

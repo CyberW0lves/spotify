@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { login } from "../../redux/authSlice/apiCalls";
 import Joi from "joi";
 import TextField from "../../components/Inputs/TextField";
@@ -15,6 +15,7 @@ import styles from "./styles.module.scss";
 const Login = () => {
 	const [data, setData] = useState({ email: "", password: "" });
 	const [errors, setErrors] = useState({});
+	const { isFetching } = useSelector((state) => state.auth);
 	const dispatch = useDispatch();
 
 	const handleInputState = (name, value) => {
@@ -100,6 +101,7 @@ const Login = () => {
 						<Button
 							type="submit"
 							label="LOG IN"
+							isFetching={isFetching}
 							style={{ color: "white", background: "#15883e", width: "20rem" }}
 						/>
 					</div>

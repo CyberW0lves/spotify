@@ -42,6 +42,13 @@
 	}
 	.body {
 		padding: 1rem 3rem;
+
+		.progress_container {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			margin: 3rem 0;
+		}
 		.body_nav {
 			display: flex;
 			justify-content: space-between;

@@ -1,6 +1,8 @@
+import { Fragment } from "react";
 import { NavLink } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { createPlayList } from "../../redux/playListSlice/apiCalls";
+import { CircularProgress } from "@mui/material";
 import HomeIcon from "@mui/icons-material/Home";
 import SearchIcon from "@mui/icons-material/Search";
 import LibraryMusicIcon from "@mui/icons-material/LibraryMusic";
@@ -10,7 +12,8 @@ import likeImg from "../../images/like.jpg";
 import styles from "./styles.module.scss";
 
 const Sidebar = () => {
-	const { playlists } = useSelector((state) => state.playlists);
+	const { playlists, getPlayListProgress, createPlayListProgress } =
+		useSelector((state) => state.playlists);
 	const { user } = useSelector((state) => state.auth);
 	const dispatch = useDispatch();
 
@@ -68,16 +71,24 @@ const Sidebar = () => {
 				<span>Liked Songs</span>
 			</NavLink>
 			<div className={styles.underline}></div>
-			{playlists.map((playlist) => (
-				<NavLink
-					key={playlist._id}
-					to={`/playlist/${playlist._id}`}
-					activeClassName={styles.active_link}
-					className={styles.playlist_link}
-				>
-					{playlist.name}
-				</NavLink>
-			))}
+			{getPlayListProgress || createPlayListProgress ? (
+				<div className={styles.progress_container}>
+					<CircularProgress style={{ color: "#1ed760" }} size="3rem" />
+				</div>
+			) : (
+				<Fragment>
+					{playlists.map((playlist) => (
+						<NavLink
+							key={playlist._id}
+							to={`/playlist/${playlist._id}`}
+							activeClassName={styles.active_link}
+							className={styles.playlist_link}
+						>
+							{playlist.name}
+						</NavLink>
+					))}
+				</Fragment>
+			)}
 		</div>
 	);
 };

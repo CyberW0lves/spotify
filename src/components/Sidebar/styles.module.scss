@@ -10,6 +10,13 @@
 	padding: 0 1rem;
 	z-index: 100;
 
+	.progress_container {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		height: 10rem;
+	}
+
 	.logo_img {
 		width: 15rem;
 		margin: 2.5rem;

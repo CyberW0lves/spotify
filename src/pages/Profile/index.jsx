@@ -35,7 +35,7 @@ const Profile = () => {
 		gender: "",
 	});
 	const [errors, setErrors] = useState({});
-	const { user } = useSelector((state) => state.user);
+	const { user, updateUserProgress } = useSelector((state) => state.user);
 	const dispatch = useDispatch();
 	const history = useHistory();
 
@@ -147,7 +147,11 @@ const Profile = () => {
 					/>
 				</div>
 				<div className={styles.submit_btn_wrapper}>
-					<Button label="Update" type="submit" />
+					<Button
+						label="Update"
+						type="submit"
+						isFetching={updateUserProgress}
+					/>
 				</div>
 			</form>
 		</div>

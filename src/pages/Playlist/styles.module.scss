@@ -1,5 +1,13 @@
 .container {
 	position: relative;
+
+	.progress_container {
+		height: 90vh;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+
 	.head {
 		position: relative;
 		display: flex;

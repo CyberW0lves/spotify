@@ -1,12 +1,13 @@
+import { Fragment } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { likeSong } from "../../redux/userSlice/apiCalls";
-import { IconButton } from "@mui/material";
+import { IconButton, CircularProgress } from "@mui/material";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import styles from "./styles.module.scss";
 
 const Like = ({ songId }) => {
-	const { user } = useSelector((state) => state.user);
+	const { user, likeSongProgress } = useSelector((state) => state.user);
 	const dispatch = useDispatch();
 
 	return (
@@ -14,10 +15,16 @@ const Like = ({ songId }) => {
 			className={styles.like_btn}
 			onClick={() => likeSong(songId, dispatch)}
 		>
-			{user && user.likedSongs.indexOf(songId) === -1 ? (
-				<FavoriteBorderIcon className={styles.like_outlined} />
+			{likeSongProgress ? (
+				<CircularProgress style={{ color: "#1ed760" }} size="2rem" />
 			) : (
-				<FavoriteIcon className={styles.like_filled} />
+				<Fragment>
+					{user && user.likedSongs.indexOf(songId) === -1 ? (
+						<FavoriteBorderIcon className={styles.like_outlined} />
+					) : (
+						<FavoriteIcon className={styles.like_filled} />
+					)}
+				</Fragment>
 			)}
 		</IconButton>
 	);
