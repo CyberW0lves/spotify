@@ -1,4 +1,4 @@
-import { Fragment } from "react";
+import { useState, Fragment } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { likeSong } from "../../redux/userSlice/apiCalls";
 import { IconButton, CircularProgress } from "@mui/material";
@@ -8,14 +8,21 @@ import styles from "./styles.module.scss";
 
 const Like = ({ songId }) => {
 	const { user, likeSongProgress } = useSelector((state) => state.user);
+	const [progress, setProgress] = useState(false);
 	const dispatch = useDispatch();
+
+	const handleLikeSong = async (songId) => {
+		setProgress(true);
+		const res = await likeSong(songId, dispatch);
+		res && setProgress(false);
+	};
 
 	return (
 		<IconButton
 			className={styles.like_btn}
-			onClick={() => likeSong(songId, dispatch)}
+			onClick={() => handleLikeSong(songId)}
 		>
-			{likeSongProgress ? (
+			{likeSongProgress && progress ? (
 				<CircularProgress style={{ color: "#1ed760" }} size="2rem" />
 			) : (
 				<Fragment>

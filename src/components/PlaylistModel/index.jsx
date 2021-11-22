@@ -31,8 +31,8 @@ const PlaylistModel = ({ closeModel, playlist }) => {
 			setIsFetching(true);
 			const url =
 				process.env.REACT_APP_API_URL + `/playlists/edit/${playlist._id}`;
-			await axiosInstance.put(url, data);
-			toast.success("success");
+			const { data: res } = await axiosInstance.put(url, data);
+			toast.success(res.message);
 			setIsFetching(false);
 			window.location.reload();
 		} catch (error) {

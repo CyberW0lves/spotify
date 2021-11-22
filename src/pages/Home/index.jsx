@@ -5,7 +5,8 @@ import Playlist from "../../components/Playlist";
 import styles from "./styles.module.scss";
 
 const Home = () => {
-	const [playlists, setPlaylists] = useState([]);
+	const [firstPlaylists, setFirstPlaylists] = useState([]);
+	const [secondPlaylists, setSecondPlaylists] = useState([]);
 	const [isFetching, setIsFetching] = useState(false);
 
 	const getRandomPlaylists = async () => {
@@ -13,8 +14,10 @@ const Home = () => {
 			setIsFetching(true);
 			const url = process.env.REACT_APP_API_URL + "/playlists/random";
 			const { data } = await axiosInstance.get(url);
-			const newarray = data.data.splice(0, 4);
-			setPlaylists(newarray);
+			const array1 = data.data.splice(0, 4);
+			const array2 = data.data;
+			setFirstPlaylists(array1);
+			setSecondPlaylists(array2);
 			setIsFetching(false);
 		} catch (error) {
 			setIsFetching(false);
@@ -35,15 +38,11 @@ const Home = () => {
 				<div className={styles.container}>
 					<h1>Good afternoon</h1>
 					<div className={styles.playlists_container}>
-						<Playlist playlists={playlists} />
+						<Playlist playlists={firstPlaylists} />
 					</div>
 					<h1>Just the hits</h1>
 					<div className={styles.playlists_container}>
-						<Playlist playlists={playlists} />
-					</div>
-					<h1>Soundtrack your home </h1>
-					<div className={styles.playlists_container}>
-						<Playlist playlists={playlists} />
+						<Playlist playlists={secondPlaylists} />
 					</div>
 				</div>
 			)}
