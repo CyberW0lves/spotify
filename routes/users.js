@@ -49,7 +49,7 @@ router.put("/:id", [validateObjectId, auth], async (req, res) => {
 		{ $set: req.body },
 		{ new: true }
 	).select("-password -__v");
-	res.status(200).send({ data: user });
+	res.status(200).send({ data: user, message: "Profile updated successfully" });
 });
 
 // delete user by id
