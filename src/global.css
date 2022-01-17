@@ -1,0 +1,55 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap");
+
+body {
+	margin: 0;
+	font-family: "Roboto", sans-serif;
+}
+
+html {
+	font-size: 10px;
+}
+
+a {
+	text-decoration: none;
+	color: inherit;
+}
+
+code {
+	font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+		monospace;
+}
+
+:root {
+	--primary: #1ed760;
+	--black: #000000;
+	--white: #ffffff;
+	--blue: #2941ab;
+	--sky-blue: #1877f2;
+	--gray: #8c8c8c;
+	--dark-green: #15883e;
+	--light-gray: #616467;
+	--light-white: #919496;
+	--light-black: #282828;
+	--light-pink: #ffcdd2;
+	--mini-black: #181818;
+	--gradient-gray: #535353;
+
+	--error: #cc0000;
+	--toastify-toast-min-height: 5rem;
+}
+
+.Toastify__toast-theme--colored.Toastify__toast--success {
+	background-color: var(--blue);
+	font-size: 1.4rem;
+	font-weight: 600;
+	text-align: center;
+	border-radius: 1rem;
+}
+
+.Toastify__toast-theme--colored.Toastify__toast--error {
+	background-color: var(--error);
+	font-size: 1.4rem;
+	font-weight: 600;
+	text-align: center;
+	border-radius: 1rem;
+}

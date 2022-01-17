@@ -1,0 +1,43 @@
+.menu,
+.playlists {
+	z-index: 100;
+	width: 15rem;
+	border-radius: 0.5rem;
+	padding: 0.5rem;
+	background-color: var(--black);
+	box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+	position: absolute;
+	top: 0%;
+	right: 0;
+
+	.option,
+	.playlist_option {
+		font-size: 1.4rem;
+		padding: 0.5rem;
+		border-radius: 0.5rem;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		cursor: pointer;
+
+		svg {
+			width: 2rem;
+			height: 2rem;
+		}
+
+		&:hover {
+			background-color: var(--light-black);
+		}
+	}
+
+	.playlist_option:hover .playlists {
+		display: block;
+	}
+
+	.playlists {
+		top: 0;
+		bottom: initial;
+		right: 95%;
+		display: none;
+	}
+}
